@@ -275,7 +275,7 @@ const FinancialCalendar = () => {
             onPress={() => setSelectedTab('Date Night')}
           >
             <Text
-              className={`text-sm font-inter-regular ${
+              className={`text-gray-800 text-sm font-archivo-semi-bold ${
                 selectedTab === 'Date Night'
                   ? 'text-white'
                   : 'text-indigo-600'
@@ -294,7 +294,7 @@ const FinancialCalendar = () => {
             onPress={() => setSelectedTab('Expenses')}
           >
             <Text
-              className={`text-sm font-inter-regular ${
+              className={`text-sm text-gray-800 font-archivo-semi-bold ${
                 selectedTab === 'Expenses'
                   ? 'text-white'
                   : 'text-indigo-600'

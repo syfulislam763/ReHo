@@ -218,8 +218,8 @@ const HomeScreen = () => {
                             
 
                             <View className="ml-3">
-                                <Text className="text-white font-inter-regular text-lg">Welcome</Text>
-                                <Text className="text-white text-sm font-inter-regular">{userProfile?.user?.name}</Text>
+                                <Text className="text-white font-archivo-semi-bold text-lg">Welcome</Text>
+                                <Text className="text-white text-sm font-archivo-semi-bold">{userProfile?.user?.name}</Text>
                             </View>
 
                         </View>
