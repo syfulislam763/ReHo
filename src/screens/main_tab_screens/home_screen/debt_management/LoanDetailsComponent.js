@@ -19,7 +19,7 @@ const LoanDetailComponent = () => {
         
         <Card loanData={route.params}/>
         {/* Optimize Button */}
-        {true?//isSubscribed
+        {isSubscribed?//
           <TouchableOpacity onPress={() => navigation.navigate("AISuggestionsComponent")} className="bg-orange-400 rounded-[5px] py-3 px-6 shadow-sm">
             <Text className="text-white text-lg font-semibold text-center">
             Optimize debt with ReHo

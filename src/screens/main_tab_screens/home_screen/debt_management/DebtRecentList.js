@@ -13,7 +13,7 @@ const DebtRecentList = ({data}) => {
       {/* Header with Add New Debt Button */}
       <View className="flex-col justify-end items-end mb-4">
 
-        {true? //isSubscribed
+        {isSubscribed? //
           <TouchableOpacity onPress={() => navigation.navigate("AISuggestionsComponent")} className="bg-orange-400 w-full rounded-[5px] py-3 px-6 shadow-sm">
             <Text className="text-white text-lg font-semibold text-center">
               Optimize debt with ReHo

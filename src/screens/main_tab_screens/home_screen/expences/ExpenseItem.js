@@ -66,7 +66,7 @@ export default function ExpenseItem() {
               title: item.name,
               date: d.month+" "+d.day+", "+d.year,
               amount: Number(item.amount),
-              icon: icons[item.name] ? icons[item.name] : '',
+              icon: icons[item.name] ? icons[item.name] : require("../../../../../assets/expence/Electricity-Bill-Expenses.png"),
               iconBg: 'bg-pink-100',
               frequency: item?.frequency,
               budgetId: item?.budgetId

@@ -434,7 +434,7 @@ export default function BudgetAnalytics() {
             <View className="rounded-2xl ">
             
             
-            {true ? //isSubscribed
+            {isSubscribed ? //
               <View>
                 <Text className="text-gray-900 font-bold text-lg mb-4">
                   ReHo Suggests:

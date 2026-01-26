@@ -13,6 +13,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 import { useAuth } from '../../../../context/AuthProvider';
 import { get_ad, get_savings_tips } from '../../ScreensAPI';
+import { formatLoanImpactText, highlightKeywords } from '@/utils/utils';
 
 const FinancialSummary = () => {
   const route = useRoute();
@@ -103,7 +104,7 @@ const FinancialSummary = () => {
             Your monthly disposable Income will decrease by %{financialData.monthlyDecrease.toFixed(2)} due to this loan. Plan accordingly!
           </Text> */}
           <Text className="text-gray-500 text-sm leading-6">
-            {tips&& tips?.savingsTip}
+            {tips&& highlightKeywords(tips?.savingsTip)}
           </Text>
         </View>
 
