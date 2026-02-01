@@ -51,11 +51,9 @@ const PremiumFinancialAdvice = () => {
             const user = userJson ? userJson : null;
 
             if (user && user.email) {
-                console.log('Current user:', user.email);
                 setCurrentUser(user);
                 return user;
             } else {
-                console.log('No user logged in');
                 return null;
             }
         } catch (error) {
@@ -88,7 +86,6 @@ const PremiumFinancialAdvice = () => {
 
             setIsLoading(false);
         } catch (error) {
-            console.error('Error initializing RevenueCat:', error);
             setIsLoading(false);
             Alert.alert('Error', 'Failed to initialize payment system. Please restart the app.');
         }
@@ -99,16 +96,15 @@ const PremiumFinancialAdvice = () => {
             const user = await getCurrentUserInfo();
 
             if (user && user.email) {
-                console.log('Logging in user to RevenueCat:', user.email);
+    
                 const { customerInfo } = await Purchases.logIn(user.email);
-                console.log('RevenueCat User ID:', customerInfo.originalAppUserId);
                 await setUserAttributes(user);
                 return customerInfo;
             } else {
-                console.log('No user to identify - using anonymous');
+
             }
         } catch (error) {
-            console.error('Error identifying user:', error);
+       
         }
     };
 
@@ -129,9 +125,9 @@ const PremiumFinancialAdvice = () => {
             };
 
             await Purchases.setAttributes(attributes);
-            console.log('User attributes set successfully');
+
         } catch (error) {
-            console.error('Error setting attributes:', error);
+
         }
     };
 
@@ -142,17 +138,16 @@ const PremiumFinancialAdvice = () => {
             setTestingMode(isTest);
 
             if (isTest) {
-                console.log('Testing Environment Detected');
-                console.log('Test User ID:', customerInfo.originalAppUserId);
+
             }
         } catch (error) {
-            console.log('Could not detect environment:', error);
+  
         }
     };
 
     const fetchOfferings = async () => {
         try {
-            console.log('Fetching offerings...');
+     
             const offerings = await Purchases.getOfferings();
 
             if (__DEV__) {
@@ -163,35 +158,26 @@ const PremiumFinancialAdvice = () => {
                 const monthlyPackage = offerings.current.monthly || offerings.current.availablePackages[0];
                 setCurrentPackage(monthlyPackage);
 
-                console.log('Product ID:', monthlyPackage.product.identifier);
-                console.log('Price:', monthlyPackage.product.priceString);
+        
 
                 const intro = monthlyPackage.product.introPrice;
                 if (intro) {
                     setIntroOffer(intro);
-                    console.log('Intro offer price:', intro.priceString);
-                    console.log('Intro offer period:', intro.period);
-                    console.log('Intro offer periodNumberOfUnits:', intro.periodNumberOfUnits);
-                    console.log('Intro offer periodUnit:', intro.periodUnit);
                 } else {
-                    console.log('No introductory offer on this package');
+                  
                 }
             } else {
-                console.log('No offerings available');
+              
             }
         } catch (error) {
-            console.error('Error fetching offerings:', error);
+      
         }
     };
 
     const checkSubscriptionStatus = async () => {
         try {
-            console.log('Checking subscription status...');
+            
             const customerInfo = await Purchases.getCustomerInfo();
-
-            console.log('Customer ID:', customerInfo.originalAppUserId);
-            console.log('Active Entitlements:', Object.keys(customerInfo.entitlements.active));
-            console.log('Active Subscriptions:', customerInfo.activeSubscriptions);
 
             const hasActiveSubscription =
                 customerInfo.entitlements.active[PREMIUM_ENTITLEMENT_ID]?.isActive === true;
@@ -201,16 +187,13 @@ const PremiumFinancialAdvice = () => {
 
             if (hasActiveSubscription) {
                 const entitlement = customerInfo.entitlements.active[PREMIUM_ENTITLEMENT_ID];
-                console.log('Subscribed - Product:', entitlement.productIdentifier);
-                console.log('Will Renew:', entitlement.willRenew);
-                console.log('Expires:', new Date(entitlement.expirationDate).toLocaleString());
+               
             } else {
-                console.log('No active subscription');
+                
             }
 
             return hasActiveSubscription;
         } catch (error) {
-            console.error('Error checking subscription:', error);
             return false;
         }
     };
@@ -237,8 +220,7 @@ const PremiumFinancialAdvice = () => {
         setIsPurchasing(true);
 
         try {
-            console.log('Initiating purchase for:', user.email);
-            console.log('Package:', currentPackage.identifier);
+          
 
             const { customerInfo, productIdentifier } = await Purchases.purchasePackage(currentPackage);
 
@@ -254,7 +236,6 @@ const PremiumFinancialAdvice = () => {
                 userProfile?.setIsSubscribed(true);
                 userProfile?.setSubscriptionInfo(customerInfo);
 
-                console.log('Subscription activated for:', user.email);
 
                 Alert.alert(
                     'Success',
@@ -264,13 +245,11 @@ const PremiumFinancialAdvice = () => {
                     [{ text: 'Continue', onPress: () => {} }]
                 );
             } else {
-                console.log('Purchase completed but entitlement not yet active');
                 Alert.alert('Notice', 'Purchase completed. Checking status...');
                 setTimeout(() => checkSubscriptionStatus(), 2000);
             }
 
         } catch (error) {
-            console.error('Purchase error:', error);
             handlePurchaseError(error);
         } finally {
             setIsPurchasing(false);
@@ -278,11 +257,7 @@ const PremiumFinancialAdvice = () => {
     };
 
     const handlePurchaseError = (error) => {
-        if (__DEV__) {
-            console.log('Purchase Error Code:', error.code);
-            console.log('Error Message:', error.message);
-        }
-
+        
         if (error.code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR) {
             console.log('User cancelled the purchase');
         } else if (error.code === PURCHASES_ERROR_CODE.PURCHASE_NOT_ALLOWED_ERROR) {
@@ -299,9 +274,8 @@ const PremiumFinancialAdvice = () => {
 const handleRedeemOfferCode = async () => {
     if (Platform.OS === 'ios') {
         try {
-            console.log('Presenting iOS offer code sheet...');
+         
             await Purchases.presentCodeRedemptionSheet();
-            console.log('Sheet dismissed, checking entitlements...');
 
             const customerInfo = await Purchases.getCustomerInfo();
             const hasAccess =
@@ -319,7 +293,7 @@ const handleRedeemOfferCode = async () => {
                     [{ text: 'Continue', onPress: () => {} }]
                 );
             } else {
-                console.log('Sheet closed, no new entitlement detected');
+
             }
         } catch (error) {
             console.error('iOS offer code error:', error);
@@ -327,12 +301,12 @@ const handleRedeemOfferCode = async () => {
         }
     } else if (Platform.OS === 'android') {
         try {
-            console.log('Opening Google Play promo code redemption...');
+     
             const supported = await Linking.canOpenURL('https://play.google.com/redeem');
 
             if (supported) {
                 await Linking.openURL('https://play.google.com/redeem');
-                console.log('Google Play redemption page opened');
+
 
                 setTimeout(async () => {
                     const customerInfo = await Purchases.getCustomerInfo();
@@ -364,7 +338,7 @@ const handleRedeemOfferCode = async () => {
     const handleRestorePurchases = async () => {
         setIsPurchasing(true);
         try {
-            console.log('Restoring purchases...');
+    
             const customerInfo = await Purchases.restorePurchases();
 
             const hasActiveSubscription =
@@ -373,14 +347,11 @@ const handleRedeemOfferCode = async () => {
             if (hasActiveSubscription) {
                 setIsSubscribed(true);
                 setSubscriptionInfo(customerInfo);
-                console.log('Subscription restored successfully');
                 Alert.alert('Success', 'Your subscription has been restored!');
             } else {
-                console.log('No active subscriptions to restore');
                 Alert.alert('No Purchases Found', 'No active subscriptions were found for this account.');
             }
         } catch (error) {
-            console.error('Restore error:', error);
             Alert.alert('Error', 'Failed to restore purchases. Please try again.');
         } finally {
             setIsPurchasing(false);
@@ -397,7 +368,6 @@ const handleRedeemOfferCode = async () => {
                     text: 'Clear Local Cache',
                     onPress: async () => {
                         try {
-                            console.log('Clearing local subscription cache...');
                             await Purchases.logOut();
                             const user = await getCurrentUserInfo();
                             if (user && user.email) {
@@ -482,30 +452,6 @@ const handleRedeemOfferCode = async () => {
         <ComponentWrapper bg_color='bg-[#5055ba]' title='Subscription Plan'>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
 
-                {__DEV__ && currentUser && (
-                    <View className="mb-4 p-3 bg-blue-100 border border-blue-400 rounded-lg">
-                        <Text className="text-blue-800 text-xs font-semibold">
-                            Logged in as: {currentUser.email}
-                        </Text>
-                        {currentUser.name && (
-                            <Text className="text-blue-700 text-xs mt-1">
-                                Name: {currentUser.name}
-                            </Text>
-                        )}
-                    </View>
-                )}
-
-                {__DEV__ && testingMode && (
-                    <View className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg">
-                        <Text className="text-yellow-800 text-xs font-semibold text-center">
-                            TESTING MODE - {Platform.OS === 'ios' ? 'StoreKit Configuration' : 'Google Play Billing Test'}
-                        </Text>
-                        <Text className="text-yellow-700 text-xs text-center mt-1">
-                            No real payments will be processed
-                        </Text>
-                    </View>
-                )}
-
                 <Text className="text-gray-900 text-2xl font-bold mb-2">
                     {isSubscribed ? "You're all set!" : "Premium Financial Advice"}
                 </Text>
@@ -577,18 +523,6 @@ const handleRedeemOfferCode = async () => {
                             </Text>
                         </View>
 
-                        {__DEV__ && (
-                            <View className="mt-4">
-                                <TouchableOpacity
-                                    onPress={handleCheckStatus}
-                                    className="p-3 bg-gray-200 rounded-lg"
-                                >
-                                    <Text className="text-gray-800 text-center font-semibold">
-                                        Check Subscription Status
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
                     </>
                 ) : (
                     <View className="space-y-3">
@@ -615,60 +549,13 @@ const handleRedeemOfferCode = async () => {
                                         Will renew: {subscriptionInfo.entitlements.active[PREMIUM_ENTITLEMENT_ID].willRenew ? 'Yes' : 'No (Cancelled)'}
                                     </Text>
                                 )}
-                                {__DEV__ && (
-                                    <Text className="text-gray-500 text-xs mt-2">
-                                        Test subscription - No actual billing
-                                    </Text>
-                                )}
+
                             </View>
                         )}
 
-                        {__DEV__ && (
-                            <View className="mt-4">
-                                <TouchableOpacity
-                                    onPress={handleCheckStatus}
-                                    className="p-3 bg-gray-200 rounded-lg"
-                                >
-                                    <Text className="text-gray-800 text-center font-semibold">
-                                        Refresh Subscription Status
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
-                        {__DEV__ && (
-                            <View className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                                <Text className="text-red-800 text-xs font-semibold mb-3 text-center">
-                                    TESTING CONTROLS (Development Only)
-                                </Text>
-
-                                <TouchableOpacity
-                                    onPress={handleForceUnsubscribe}
-                                    className="p-3 bg-red-500 rounded-lg flex-row items-center justify-center"
-                                >
-                                    <Trash2 size={16} color="#FFFFFF" />
-                                    <Text className="text-white font-semibold ml-2">
-                                        Force Unsubscribe (Test Only)
-                                    </Text>
-                                </TouchableOpacity>
-
-                                <Text className="text-red-600 text-xs mt-3 text-center">
-                                    This button is for TESTING ONLY and will be removed in production
-                                </Text>
-                            </View>
-                        )}
                     </View>
                 )}
 
-                <View className="mt-6 p-3 bg-gray-50 rounded-lg">
-                    <Text className="text-gray-500 text-xs text-center">
-                        {__DEV__
-                            ? 'Test Mode: Subscription status checked automatically on login.'
-                            : isFreeIntro
-                                ? `Free trial for ${getTrialPeriodText()}, then ${currentPackage?.product.priceString}/month. Cancel anytime before trial ends to avoid charges.`
-                                : 'Subscription automatically renews unless canceled. Manage in App Store settings.'}
-                    </Text>
-                </View>
             </ScrollView>
         </ComponentWrapper>
     );
