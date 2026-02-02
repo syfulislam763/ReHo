@@ -34,11 +34,11 @@ export const AuthProvider = ({children}) => {
         const wsURL = "ws://10.10.10.32:5000?token="+token;
         notificationRef.current = io(wsURL);
         notificationRef.current.on('connect', (msg) => {
-            console.log("notifidation connected")
-            //console.log("test", notifications)
+    
+
         })
         notificationRef.current.on('notification', (msg) => {
-            console.log('nt', JSON.stringify(msg, null, 2))
+
             const d = get_formated_time(msg?.createdAt);
             let temp = {
                 id: msg?._id,
@@ -56,7 +56,7 @@ export const AuthProvider = ({children}) => {
         })
 
         notificationRef.current.onAny((eventName) => {
-            console.log(eventName)
+         
         })
 
         
@@ -64,7 +64,7 @@ export const AuthProvider = ({children}) => {
        
     }
 
-    //console.log("notifor put", JSON.stringify(notifications, null, 2))
+
 
 
     const handleLogout = () => {

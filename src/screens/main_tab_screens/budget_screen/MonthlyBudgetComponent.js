@@ -36,7 +36,7 @@ const MonthlyBudgetComponent = () => {
 
     get_monthly_budget(selectedTab.toLowerCase(), res => {
       if(res){
-        console.log(JSON.stringify(res, null, 2), "budget data")
+
         const temp = res.data?.budgetData?.map(item => {
           return {
             id: item._id,

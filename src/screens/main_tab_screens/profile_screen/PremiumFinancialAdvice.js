@@ -259,7 +259,7 @@ const PremiumFinancialAdvice = () => {
     const handlePurchaseError = (error) => {
         
         if (error.code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR) {
-            console.log('User cancelled the purchase');
+          
         } else if (error.code === PURCHASES_ERROR_CODE.PURCHASE_NOT_ALLOWED_ERROR) {
             Alert.alert('Purchase Not Allowed', 'In-app purchases are disabled on this device.');
         } else if (error.code === PURCHASES_ERROR_CODE.PAYMENT_PENDING_ERROR) {

@@ -40,7 +40,7 @@ const PartnerForm = () => {
             relation: relationship
         }
 
-        console.log(payload, "test")
+        
 
         setVisible(true);
 

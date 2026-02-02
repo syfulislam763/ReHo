@@ -62,7 +62,7 @@ const TimeSelector = () => {
       ask: route.params.formData.askYouThis,
     };
 
-    console.log('Payload:', JSON.stringify(payload, null, 2));
+
 
     setVisible(true);
 

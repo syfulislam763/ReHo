@@ -7,9 +7,7 @@ export const AI_ROOT_URL = config.AI_API_URL;
 export const CHAT_URL = config.AI_CHAT_URL;
 
 if(__DEV__){
-    console.log(ROOT_URL);
-    console.log(SOCKET_URL);
-    console.log(CHAT_URL);
+    
 }
 
 // AI Feedback URLs

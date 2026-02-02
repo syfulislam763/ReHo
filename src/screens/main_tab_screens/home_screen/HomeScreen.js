@@ -45,7 +45,7 @@ const HomeScreen = () => {
         setVisible(true);
         get_analytics((res) => {
             if(res){
-                console.log(JSON.stringify(res, null, 2), "**")
+         
                 setUserProfile(res?.data);
                 initializeRevenueCat(res?.data?.user, (isSubscribed, subscriptionInfo) => {
                     setIsSubscribed(isSubscribed);
@@ -58,7 +58,7 @@ const HomeScreen = () => {
         })
         get_last_analytics((res) => {
             if(res){
-                console.log(JSON.stringify(res, null, 2), "dfd")
+             
                 setFinancialForecast(res?.data)
             }
         })
@@ -91,7 +91,7 @@ const HomeScreen = () => {
                 await videoRef.current.stopAsync();
                 await videoRef.current.unloadAsync();
             } catch (error) {
-                console.log('Error stopping video:', error);
+               
             }
         }
         setShowVideoModal(false);
@@ -108,7 +108,7 @@ const HomeScreen = () => {
     const toggleResizeMode = () => {
         // setResizeMode(prevMode => prevMode === 'fill' ? 'contain' : 'fill');
         const temp = scaleVideo == 1? height/width: 1;
-        console.log(height/width)
+  
         setScaleVideo(temp);
     }
 
@@ -270,15 +270,15 @@ const HomeScreen = () => {
                                 isMuted={isMuted}
                                 volume={1.0}
                                 onLoadStart={() => {
-                                    console.log('Video loading started');
+                                
                                     setIsVideoLoading(true);
                                 }}
                                 onLoad={(loadStatus) => {
-                                    console.log('Video loaded successfully');
+                                  
                                     setIsVideoLoading(false);
                                 }}
                                 onReadyForDisplay={() => {
-                                    console.log('Video ready for display');
+                                  
                                     setIsVideoLoading(false);
                                 }}
                                 onPlaybackStatusUpdate={(playbackStatus) => {
@@ -291,7 +291,7 @@ const HomeScreen = () => {
                                     }
                                 }}
                                 onError={(error) => {
-                                    console.log('Video error:', error);
+                                 
                                     setIsVideoLoading(false);
                                 }}
                             />

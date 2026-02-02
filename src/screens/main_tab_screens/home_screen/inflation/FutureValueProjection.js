@@ -35,8 +35,6 @@ const FutureValueProjection = () => {
 
 
 
-    console.log("inflation -> ", JSON.stringify(params, null, 2))
-
   return (
     <CommponentWrapper container_bg='bg-white' title='Inflation Calculator Results'>
         <ScrollView showsVerticalScrollIndicator={false} className="flex-1">

@@ -52,6 +52,8 @@ const AddExpenseForm = () => {
 
   const navigation = useNavigation();
 
+  const freqValidator = {"One-off": 'on-off', "one-off": "on-off"}
+
   const frequencies = ['Monthly', 'Yearly', 'One-off'];
   
   const expenseNames = [
@@ -111,12 +113,12 @@ const AddExpenseForm = () => {
       name: expenseName == "Other"?otherExpenseName:expenseName,
       amount: Number(amount),
       endDate: formatDateForPayload(date),
-      frequency: frequency.toLowerCase(),
-      type: budgetType.toLowerCase(),
+      frequency: freqValidator[frequency?.toLowerCase()]?freqValidator[frequency?.toLowerCase()]:frequency?.toLowerCase(),
+      type: budgetType?.toLowerCase(),
       category: category
     }
 
-    console.log(payload);
+
 
     setVisible(true);
 
@@ -131,7 +133,7 @@ const AddExpenseForm = () => {
       post_expence(payload, (res) => {
         if(res){
           //success
-          console.log("created", JSON.stringify(res, null, 2));
+  
           ToastMessage("success", "Expense added successfully!", 2000);
           navigation.goBack();
         }else{
@@ -145,7 +147,7 @@ const AddExpenseForm = () => {
 
   useEffect(() => {
     if(route?.params?.type == "edit"){
-      console.log(JSON.stringify(route?.params, null, 2))
+  
       if(expenseNames.includes(route?.params?.title)){
         setExpenseName(route?.params?.title)
       }else{
@@ -162,7 +164,6 @@ const AddExpenseForm = () => {
       setCategory(route?.params?.budgetId?.category)
       
 
-      console.log("ex", JSON.stringify(route.params, null, 2))
     }
   }, [route?.params])
 
@@ -253,12 +254,12 @@ const AddExpenseForm = () => {
               </Text>
               <View className="flex-row">
                   <RadioButton
-                  selected={budgetType.toLowerCase() === 'personal'}
+                  selected={budgetType?.toLowerCase() === 'personal'}
                   onPress={() => setBudgetType('Personal')}
                   label="Personal"
                   />
                   <RadioButton
-                  selected={budgetType.toLowerCase() === 'household'}
+                  selected={budgetType?.toLowerCase() === 'household'}
                   onPress={() => setBudgetType('Household')}
                   label="Household"
                   />

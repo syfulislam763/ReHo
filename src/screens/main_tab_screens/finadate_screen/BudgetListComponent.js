@@ -26,7 +26,7 @@ const BudgetListComponent = () => {
 
     get_date_night(res => {
       if(res){
-        console.log(JSON.stringify(res.data, null, 2));
+    
         const temp = res.data.map(item => {
           const d = get_formated_time(item.date);
            

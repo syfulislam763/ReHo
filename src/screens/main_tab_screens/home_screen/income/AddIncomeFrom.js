@@ -72,7 +72,7 @@ const AddIncomeForm = () => {
   };
 
   const handleDateSelect = (params) => {
-    console.log(params)
+
     setDate(dayjs(params.date));
     setShowDatePicker(false);
   };
@@ -81,16 +81,18 @@ const AddIncomeForm = () => {
     setIncomeSource(source);
     setShowIncomeDropdown(false);
   };
+  const freqValidatorRev = {"On-off": 'one-off', "on-off": "One-off"}
+  const freqValidator = {"One-off": 'on-off', "one-off": "on-off"}
 
   const handleCreateIncome = () => {
     const payload = {
       name: incomeSource=="Other"?otherIncomeSource:incomeSource,
       amount: Number(amount),
       receiveDate: formatDateForPayload(date),
-      frequency: frequency.toLowerCase()
+      frequency: freqValidator[frequency?.toLowerCase()]?freqValidator[frequency?.toLowerCase()]:frequency?.toLowerCase()
     } 
 
-    console.log(payload)
+
 
     setVisible(true);
 
@@ -106,7 +108,7 @@ const AddIncomeForm = () => {
       post_incomes(payload, (res) => {
         if(res){
           //success
-          console.log("created", JSON.stringify(res, null, 2))
+      
           ToastMessage("success", "Income added successfully!", 2000);
           navigation.goBack();
           
@@ -129,11 +131,11 @@ const AddIncomeForm = () => {
       setFrequency(capitalize(route?.params?.frequency))
       const iso = convertToISO(route?.params?.date);
       setAmount(route?.params?.amount+"");
-      console.log(iso, route?.params?.date)
+    
       setDate(dayjs(iso))
 
     }
-    console.log(JSON.stringify(route.params, null, 2))
+ 
   }, [route?.params])
 
   const RadioButton = ({ selected, onPress, label }) => (

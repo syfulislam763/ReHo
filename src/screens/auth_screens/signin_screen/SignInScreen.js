@@ -43,11 +43,11 @@ const SignInScreen = () => {
             ToastMessage("error", "Password should be minimum 8 character");
             return;
         }
-        console.log("payload ->", payload);
+     
         setLoader(true)
         //setIsAuthenticated(true)
         login_user(payload, (data) => {
-            console.log(data, "tt");
+          
             if(data?.statusCode==409){
               
                 resend_otp({email: payload.email}, (data) => {
@@ -61,10 +61,10 @@ const SignInScreen = () => {
             }
             else if(data){
                 SignInUser(data?.data);
-                console.log("logged in: ", JSON.stringify(data, null, 2))
+              
             }
             else{
-                console.log("user logged failed", data)
+               
             }
             setLoader(false);
         })

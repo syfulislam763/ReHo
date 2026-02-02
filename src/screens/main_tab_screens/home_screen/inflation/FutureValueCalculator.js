@@ -70,7 +70,7 @@ const FutureValueCalculator = () => {
   }, []);
 
   const handleCalculateFutureValue = () => {
-    console.log("fu", futureValues);
+
     const payload = {
       initialAmount:parseInt(futureValues.initialAmount),
       annualInflationRate: parseInt(futureValues.inflationRate),
@@ -90,7 +90,7 @@ const FutureValueCalculator = () => {
   }
 
   const handleCalculateHistoricalValue = () => {
-    console.log("his", historicalValues);
+    
     setVisible(true);
     const payload = {
         amount: Number(historicalValues.amount),

@@ -141,7 +141,7 @@ const PartnerRequestScreen = () => {
                   setOutgoingList(res?.data?.outgoing);
                 }
 
-                console.log(res.data);
+           
             }else{
                 setRequestList([])
             }
@@ -154,7 +154,7 @@ const PartnerRequestScreen = () => {
         handleGetRequestList(accepted);
     }, [accepted])
 
-    console.log(JSON.stringify(currentList, null,2 ))
+ 
 
 
 

@@ -21,7 +21,7 @@ export const reset_password = async (payload,token, cb) => {
         cb(res.data)
     }catch(e){
         cb(null)
-        console.log("re", JSON.stringify(e.response, null, 2))
+  
         ToastMessage("error", e?.response?.data?.message, 3000)
     }
 }
@@ -45,11 +45,10 @@ export const login_user = async (payload, cb) => {
             cb({
                 statusCode: 409
             })
-            console.log(JSON.stringify(e?.response, null, 2))
+          
         }else{
             cb(null)
-            console.log(JSON.stringify(e?.response, null, 2))
-            console.log("log ", e.status)
+            
             ToastMessage("error", e?.response?.data?.message, 3000)
         }
     }
@@ -69,8 +68,7 @@ export const create_user = async (payload, cb) => {
             ToastMessage("error", "User is exist, Login please", 3000)
         }else{
             cb(null)
-            console.log(JSON.stringify(e?.response, null, 2))
-            console.log("log ", e.status)
+           
             ToastMessage("error", "Enter valid information", 3000)
         }   
     }
@@ -83,7 +81,7 @@ export const verify_email = async (payload, cb) => {
         cb(res.data)
     }catch(e){
         cb(null)
-        console.log(JSON.stringify(e, null, 2))
+    
         //ToastMessage("error", e?.response?.data?.message, 3000)
     }
 }
@@ -94,7 +92,7 @@ export const resend_otp = async (payload, cb) => {
         cb(res.data)
     }catch(e){
         cb(null)
-        console.log(JSON.stringify(e?.response, null, 2))
+
         ToastMessage("error", e?.response?.data?.message, 3000)
     }
 }

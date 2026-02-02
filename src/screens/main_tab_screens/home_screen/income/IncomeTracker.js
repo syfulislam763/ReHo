@@ -33,11 +33,13 @@ const IncomeTracker = () => {
   const [visible, setVisible] = useState(false);
   const [totalIncome, setTotalIncome] = useState(0)
   
+  const freqValidatorRev = {"On-off": 'one-off', "on-off": "One-off"}
+  const freqValidator = {"One-off": 'on-off', "one-off": "on-off"}
 
   const handleGetIncomeList = () => {
     setVisible(true);
-    const frequency = activeTab.toLowerCase();
-    console.log(frequency);
+    const frequency = freqValidator[activeTab?.toLowerCase()]?freqValidator[activeTab?.toLowerCase()]:activeTab?.toLowerCase();
+
     get_incomes(frequency, res => {
       if(res){
         const temp = res.data.map(item => {
@@ -50,7 +52,7 @@ const IncomeTracker = () => {
             amount: Number(item.amount).toFixed(0),
             icon: icons[item.name]?icons[item.name]:'',
             bgColor: 'bg-pink-100',
-            frequency: item.frequency
+            frequency: freqValidatorRev[item?.frequency]?freqValidatorRev[item?.frequency]:item?.frequency
           }
         })
 
@@ -131,6 +133,8 @@ const IncomeTracker = () => {
   };
 
   const tabs = ['All', 'Monthly', 'Yearly', 'One-off'];
+
+
    
   return (
     <SafeAreaView className="flex-1 bg-[#2E7D32]">

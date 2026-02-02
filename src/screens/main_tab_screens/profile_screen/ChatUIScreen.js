@@ -116,7 +116,7 @@ const ChatUIScreen = () => {
     conversationRef.current = new WebSocket(wsURL);
 
     conversationRef.current.onopen = () => {
-      console.log("conversation socket connected");
+   
       setIsConversationSocketConnected(true);
     };
 
@@ -132,7 +132,7 @@ const ChatUIScreen = () => {
             isUser: item.role == "user" ? true : false,
           }));
           setMessages(temp);
-          console.log(JSON.stringify(temp, null, 2))
+    
           setIsLoadingHistory(false); 
         }
 
@@ -157,7 +157,7 @@ const ChatUIScreen = () => {
     };
 
     conversationRef.current.onclose = () => {
-      console.log("Socket disconnected");
+     
       setIsConversationSocketConnected(false);
       setIsLoadingHistory(false);
     };

@@ -49,7 +49,7 @@ const BudgetFormComponent = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  console.log("do know", JSON.stringify(route.params, null, 2))
+
 
   useEffect(() => {
     if(route?.params?.isEdit){
@@ -75,10 +75,10 @@ const BudgetFormComponent = () => {
       name: budgetName=="Other"?otherBudgetName:budgetName,
       amount: Number(amount),
       category: category,
-      type: budgetType.toLowerCase()
+      type: budgetType?.toLowerCase()
     }
 
-    console.log(payload);
+
 
     setVisible(true);
 
@@ -86,7 +86,7 @@ const BudgetFormComponent = () => {
       update_budget(payload, route?.params?.id, res => {
       if(res){
         //success
-        console.log("created", JSON.stringify(res, null, 2));
+     
         ToastMessage("success", "Budget updated successfully!", 2000);
         navigation.goBack();
       }
@@ -100,7 +100,7 @@ const BudgetFormComponent = () => {
       post_budget(payload, res => {
         if(res){
           //success
-          console.log("created", JSON.stringify(res, null, 2));
+    
           ToastMessage("success", "Budget added successfully!", 2000);
           navigation.goBack();
         }
@@ -204,12 +204,12 @@ const BudgetFormComponent = () => {
             </Text>
             <View className="flex-row">
                 <RadioButton
-                selected={budgetType.toLowerCase() === 'personal'}
+                selected={budgetType?.toLowerCase() === 'personal'}
                 onPress={() => setBudgetType('Personal')}
                 label="Personal"
                 />
                 <RadioButton
-                selected={budgetType.toLowerCase() === 'household'}
+                selected={budgetType?.toLowerCase() === 'household'}
                 onPress={() => setBudgetType('Household')}
                 label="Household"
                 />

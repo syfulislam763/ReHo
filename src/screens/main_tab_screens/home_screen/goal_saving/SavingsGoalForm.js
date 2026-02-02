@@ -63,7 +63,7 @@ const SavingsGoalForm = () => {
       savedMoney: currentValue
     }
 
-    console.log(payload);
+
 
     setVisible(true);
 
@@ -82,7 +82,7 @@ const SavingsGoalForm = () => {
       post_saving_goal(payload, res => {
         if(res){
           //success
-          console.log("created", JSON.stringify(res, null, 2));
+  
           ToastMessage("success", "Savings goal added successfully!", 2000);
           navigation.goBack();
         }else{

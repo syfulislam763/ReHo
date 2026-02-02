@@ -85,11 +85,11 @@ const AddDebtScreen = () => {
             payDueDate: formatDateForPayload(newDebt.dueDate)
         }
 
-        console.log('Debt Payload:', payload);
+
 
         post_debts(payload, (res) => {
             if(res){
-                console.log("Debt created", JSON.stringify(res, null, 2));
+            
                 navigation.goBack();
             }else{
                 

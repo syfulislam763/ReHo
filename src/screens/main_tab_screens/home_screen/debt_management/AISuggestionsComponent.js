@@ -29,7 +29,7 @@ const AISuggestionsComponent = () => {
             
             if(res){
                 setRehoSuggestions(res)
-                console.log("Debt suggestions", JSON.stringify(res, null, 2))
+            
             }else{
 
             }

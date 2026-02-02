@@ -51,13 +51,13 @@ api.interceptors.response.use(
   async error => {
     if(error.response?.status == 523){
       //handleToast("error", "Try again please, network error", 2000, ()=>{})
-        console.log("error 523")
+ 
     }
     if (error.response?.status === 401) {
       // Access to navigation should be passed manually
       // OR use a global navigationRef pattern if needed
       //handleToast("error", "Login again please", 2000, ()=>{})
-        console.log("error 401")
+     
     }
     return Promise.reject(error);
   }

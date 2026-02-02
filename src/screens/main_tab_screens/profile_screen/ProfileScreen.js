@@ -58,8 +58,6 @@ const ProfileScreen = () => {
     try {
       setIsUploading(true);
 
-      console.log(imageUri)
-      // Create FormData
       const formData = new FormData();
       
       // Get file extension
@@ -76,14 +74,12 @@ const ProfileScreen = () => {
       
 
 
-      console.log('FormData ready to send:', formData);
 
       update_profile(formData, res => {
         if(res){
-          console.log(res);
-          console.log("updated image")
+        
         }else{
-          console.log("nope")
+       
         }
       })
       setProfileImage(imageUri);

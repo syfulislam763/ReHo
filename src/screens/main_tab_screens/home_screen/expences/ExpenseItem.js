@@ -51,13 +51,14 @@ export default function ExpenseItem() {
     const [totalExpence, setTotalExpence] = useState(0);
     const [activeTab, setActiveTab] = useState('All');
     const [filteredExpenseList, setFilteredExpenseList] = useState([])
-
+    const freqValidatorRev = {"On-off": 'one-off', "on-off": "One-off"}
+    const freqValidator = {"One-off": 'on-off', "one-off": "on-off"}
     const handleGetExpence = () => {
       setVisible(true);
-      const frequency = activeTab.toLowerCase();
+      const frequency = freqValidator[activeTab?.toLowerCase()]?freqValidator[activeTab?.toLowerCase()]:activeTab?.toLowerCase();
       get_expence(frequency, res => {
         if(res){
-          console.log(JSON.stringify(res, null, 2))
+       
           const temp = res.data.map(item => {
             const d = get_formated_time(item.endDate);
             return {
@@ -68,7 +69,7 @@ export default function ExpenseItem() {
               amount: Number(item.amount),
               icon: icons[item.name] ? icons[item.name] : require("../../../../../assets/expence/Electricity-Bill-Expenses.png"),
               iconBg: 'bg-pink-100',
-              frequency: item?.frequency,
+              frequency: freqValidatorRev[item?.frequency]?freqValidatorRev[item?.frequency] : item?.frequency,
               budgetId: item?.budgetId
             }
           });

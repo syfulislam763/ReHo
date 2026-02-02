@@ -50,7 +50,7 @@ const FinancialForm = () => {
 
     setVisible(true);
 
-    console.log(payload)
+
 
     calculate_regular_savings(payload, res => {
         if(res){

@@ -49,7 +49,7 @@ const FinancialSummary = () => {
   )
 
 
-  console.log(adData)
+
 
   const financialData = {
     totalSaved: route.params.totalSavedBeforeTax,

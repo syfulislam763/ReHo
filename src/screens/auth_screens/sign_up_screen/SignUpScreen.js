@@ -57,17 +57,17 @@ const SignUpScreen = () => {
                 password
             }
             setLoader(true);
-            console.log(payload, "test")
+        
             create_user(payload, (data) => {
                 if(data?.statusCode == 409){
                     navigation.navigate("SignInScreen")
                 }
                 else if(data){
-                    console.log("res ->", JSON.stringify(data, null, 2))
+
                     navigation.navigate("SignUpOTPVerification", {...payload})
                 }
                 else{
-                    console.log("went wrong")
+                
                 }
                 setLoader(false);
             });

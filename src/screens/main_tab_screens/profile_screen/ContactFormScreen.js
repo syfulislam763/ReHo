@@ -66,7 +66,7 @@ const ContactFormScreen = () => {
   };
 
   const handleContinue = () => {
-    console.log("form", formData)
+
     navigation.navigate("TimeSelector", {formData: {...formData, householdIncome: householdValue[formData.householdIncome]}})
   };
 

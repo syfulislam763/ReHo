@@ -31,7 +31,7 @@ const VideoTutorialsScreen = () => {
     setVisible(true);
 
     get_contents(async (res) => {
-      console.log(JSON.stringify(res.data.result, null, 2));
+      
 
       if (res && res.data && res.data.result) {
         
@@ -87,7 +87,7 @@ const VideoTutorialsScreen = () => {
       try {
         await videoRef.current.stopAsync();
       } catch (error) {
-        console.log("Error stopping video:", error);
+    
       }
     }
     setSelectedVideo(null);

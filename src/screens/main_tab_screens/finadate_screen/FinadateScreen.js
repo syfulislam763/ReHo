@@ -216,7 +216,7 @@ const FinadateScreen = () => {
     }else{
       post_date_night(payload, res => {
         if(res){
-          console.log("created", JSON.stringify(res, null, 2));
+      
           ToastMessage("success", "Date night added successfully!", 2000);
           navigation.goBack();
         }else{

@@ -34,7 +34,7 @@ const FinancialRemindersSettings = () => {
     setVisible(true);
 
     update_notification_settings(payload, res => {
-      console.log(res)
+ 
       if(res){
 
       }else{

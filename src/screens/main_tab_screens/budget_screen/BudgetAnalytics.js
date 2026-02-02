@@ -407,7 +407,7 @@ export default function BudgetAnalytics() {
     get_budget_suggestions(authToken.accessToken, res => {
       if(res){
         setRehoSuggestions(res);
-        console.log(JSON.stringify(res, null, 2), "Reho budget suggestion")
+       
       }
     })
   }

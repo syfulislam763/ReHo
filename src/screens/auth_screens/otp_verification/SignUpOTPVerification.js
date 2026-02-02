@@ -49,18 +49,17 @@ const SignUpOTPVerification = () => {
 
 
     const submitOTP = () => {
-        console.log(otp.join(""))
-        console.log(route.params)
+       
 
         const payload = {
             email: route.params?.email,
             oneTimeCode: +otp.join("")
         }
-        console.log(payload, ":")
+ 
         setLoader(true);
         verify_email(payload, (data) => {
             if(data){
-                console.log(JSON.stringify(data, null, 2), " email verified")
+           
                 if(route.params?.flag){
                     navigation.navigate("CreateNewPassword", {verifyToken: data.data.verifyToken})
                 }else{
@@ -69,7 +68,7 @@ const SignUpOTPVerification = () => {
                 
             }else{
                 ToastMessage("error", "Email varification failed, try again!", 3000);
-                console.log(data, 'er')
+                
             }
             setLoader(false);
         })
@@ -83,7 +82,7 @@ const SignUpOTPVerification = () => {
         const payload = {
             email: route.params?.email,
         }
-        console.log(payload)
+    
         resend_otp(payload, (data) => {
             if(data){
                 ToastMessage("success", "OTP has been sent!", 3000)

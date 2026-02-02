@@ -188,10 +188,10 @@ export default function ExpenseAnalytics() {
   
     const handleGetRehoSuggetions = () => {
       get_expence_suggestions(authToken.accessToken, res => {
-        console.log("hdd")
+  
         if(res){
           setRehoSuggestions(res)
-          // console.log(JSON.stringify(res, null, 2), "Reho budget suggestion")
+  
         }
       })
     }

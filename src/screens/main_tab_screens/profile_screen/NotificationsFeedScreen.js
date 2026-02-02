@@ -9,7 +9,7 @@ const NotificationsFeedScreen = () => {
 
   const notificationRef = useRef(null);
 
-  //console.log(JSON.stringify(notifications, null, 2))
+  
 
 
  

@@ -22,7 +22,7 @@ const FinancialCalendar = () => {
   
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  //console.log(JSON.stringify(financialForecast, null, 2), "fore")
+
 
   // Generate calendar days for current month
   const generateCalendarDays = () => {
@@ -81,7 +81,7 @@ const FinancialCalendar = () => {
 
   useEffect(() => {
     if(financialForecast?.dateNights){
-      console.log(JSON.stringify(financialForecast?.dateNights, null, 2))
+   
       const temp = financialForecast?.dateNights?.map(item => {
         const d = get_formated_time(item.date)
         const date = d.month+" "+d.day+", " + d.year;
