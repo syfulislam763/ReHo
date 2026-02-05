@@ -50,7 +50,7 @@ const IncomeTracker = () => {
             title: item.name,
             date: d.month+" "+d.day+", "+d.year,
             amount: Number(item.amount).toFixed(0),
-            icon: icons[item.name]?icons[item.name]:'',
+            icon: icons[item.name]?icons[item.name]:require("../../../../../assets/income/Other-Income.png"),
             bgColor: 'bg-pink-100',
             frequency: freqValidatorRev[item?.frequency]?freqValidatorRev[item?.frequency]:item?.frequency
           }
