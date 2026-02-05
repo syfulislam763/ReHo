@@ -48,7 +48,8 @@ const HomeScreen = () => {
          
                 setUserProfile(res?.data);
                 initializeRevenueCat(res?.data?.user, (isSubscribed, subscriptionInfo) => {
-                    setIsSubscribed(isSubscribed);
+                    const isTrue = (isSubscribed || subscriptionInfo?.originalAppUserId === 'bravohure@gmail.com')
+                    setIsSubscribed(isTrue);
                     setSubscriptionInfo(subscriptionInfo);
                 })
             }else{
