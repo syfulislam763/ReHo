@@ -10,7 +10,9 @@ npm-debug.*
 *.orig.*
 web-build/
 
-
+upload-keystore.jks
+credentials.json
+*.pem
 
 
 ios
