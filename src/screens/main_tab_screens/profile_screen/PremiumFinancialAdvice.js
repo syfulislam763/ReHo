@@ -10,7 +10,7 @@ import { useAuth } from '../../../context/AuthProvider';
 import { REVENUECAT_IOS_API_KEY, PREMIUM_ENTITLEMENT_ID, REVENUECAT_ANDROID_API_KEY } from '../../../constants/Paths';
 import { Linking } from 'react-native';
 
-const TERMS_OF_USE_URL = 'https://rehowealth.co.uk/privacy-policy-2/';       
+const TERMS_OF_USE_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';       
 const PRIVACY_POLICY_URL = 'https://rehowealth.co.uk/privacy-policy-2/';   
 
 
@@ -32,7 +32,6 @@ const FeatureItem = React.memo(({ text }) => (
     </View>
 ));
 
-// ─── Issue 4 Fix: Legal footer with Terms of Use and Privacy Policy links ─────
 const LegalFooter = () => (
     <View className="mt-5 px-2">
         <Text className="text-gray-400 text-xs text-center leading-5">
@@ -353,7 +352,7 @@ const PremiumFinancialAdvice = () => {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
 
                 <Text className="text-gray-900 text-2xl font-bold mb-2">
-                    {isSubscribed ? "You're all set!" : "Premium Financial Advice"}
+                    {isSubscribed ? "You're all set!" : "Premium Monthly Plan"}
                 </Text>
 
                 {/* ── Issue 3 Fix: Billed amount is always the LARGEST, most prominent element ── */}
@@ -423,7 +422,12 @@ const PremiumFinancialAdvice = () => {
                             <Text className="text-indigo-600 font-semibold ml-2">
                                 Redeem Offer Code
                             </Text>
+                            
                         </TouchableOpacity>
+
+                        <Text className="text-green-700 text-xs text-center mt-1">
+                            Have a promo or gift code? Redeem it here.
+                        </Text>
 
                         <View className="mt-4">
                             <Text

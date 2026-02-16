@@ -48,6 +48,24 @@ const TermsAndPolicy = () => {
             text: `If you have any privacy concerns, contact us at clientsupport@rehowealth.co.uk`,
             id: 8
         },
+        {
+            title: 'Premium monthly plan',
+            text: `Subscribe to the Premium Monthly Plan for £2.99 per month, billed automatically until cancelled. This subscription gives you full access to the Ask ReHo chatbot for all your finance-related questions, the ability to book guidance appointments with a financial planner, and receive market tips, insights, and analysis directly by email. You will also benefit from priority support for all your financial enquiries, along with the ability to share and collaborate on your expenses and budget seamlessly.`,
+            id: 9
+        },
+
+        {
+            title: 'Length of subscription',
+            text: `The subscription is indefinite, meaning it continues for an unlimited period unless cancelled. You may cancel at any time, and billing will cease within seven days of your most recent payment.`,
+            id: 10
+        },
+
+        {
+            title: 'Price of subscription',
+            text: `The Premium Monthly Plan costs approximately £0.75 per week, billed at £2.99 on a monthly basis.`,
+            id: 11
+        },
+
 
 
     ]
