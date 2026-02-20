@@ -69,7 +69,7 @@ export const create_user = async (payload, cb) => {
         }else{
             cb(null)
            
-            ToastMessage("error", "Enter valid information", 3000)
+            ToastMessage("error", "This account may deleted try different email", 3000)
         }   
     }
 }

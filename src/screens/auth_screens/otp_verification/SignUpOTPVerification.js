@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AppHeader from '../../../components/AppHeader';
@@ -9,6 +9,8 @@ import PrimaryButton from '../../../components/PrimaryButton';
 import { verify_email, resend_otp } from '../AuthAPI';
 import { useRoute } from '@react-navigation/native';
 import ToastMessage from '../../../constants/ToastMessage';
+import Indicator from '@/components/Indicator';
+
 
 const roket = require("../../../../assets/img/roket.png")
 
@@ -151,7 +153,11 @@ const SignUpOTPVerification = () => {
 
                 {/* Verify Button */}
                 <PrimaryButton
-                    onPress={submitOTP}
+                    onPress={() => {
+                        if(!loader){
+                            submitOTP();
+                        }
+                    }}
                     text='Verify'
                     bgColor={otp.length>=4?"bg-button-bg":'bg-[#EBEBEA]'}
                 />
@@ -169,6 +175,14 @@ const SignUpOTPVerification = () => {
                     </Text> */}
                 </View>
             </View>
+
+
+            {loader && <Indicator 
+            visible={loader}
+            onClose={()=>setLoader()}>
+                <ActivityIndicator size={"large"}/>
+            </Indicator>
+        }
         </SafeAreaView>
     );
 };

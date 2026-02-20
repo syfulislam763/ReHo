@@ -5,14 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import Purchases, { LOG_LEVEL, PURCHASES_ERROR_CODE } from 'react-native-purchases';
 import ComponentWrapper from '../../../components/ComponentWrapper';
 import PrimaryButton from '../../../components/PrimaryButton';
-
 import { useAuth } from '../../../context/AuthProvider';
 import { REVENUECAT_IOS_API_KEY, PREMIUM_ENTITLEMENT_ID, REVENUECAT_ANDROID_API_KEY } from '../../../constants/Paths';
 import { Linking } from 'react-native';
 
-const TERMS_OF_USE_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';       
-const PRIVACY_POLICY_URL = 'https://rehowealth.co.uk/privacy-policy-2/';   
-
+const TERMS_OF_USE_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
+const PRIVACY_POLICY_URL = 'https://rehowealth.co.uk/privacy-policy-2/';
 
 const features = [
     "Ask financial planners questions via AI chat",
@@ -55,7 +53,6 @@ const LegalFooter = () => (
         </Text>
     </View>
 );
-
 
 const PremiumFinancialAdvice = () => {
     const [currentPackage, setCurrentPackage] = useState(null);
@@ -128,7 +125,6 @@ const PremiumFinancialAdvice = () => {
                 return customerInfo;
             }
         } catch (error) {
-            // silent
         }
     };
 
@@ -143,7 +139,6 @@ const PremiumFinancialAdvice = () => {
             };
             await Purchases.setAttributes(attributes);
         } catch (error) {
-            // silent
         }
     };
 
@@ -153,7 +148,46 @@ const PremiumFinancialAdvice = () => {
             const isTest = customerInfo.originalAppUserId.includes('RCAnonymous') || __DEV__;
             setTestingMode(isTest);
         } catch (error) {
-            // silent
+        }
+    };
+
+    // const checkTrialEligibility = async (pkg) => {
+    //     try {
+    //         const productId = pkg.product.identifier;
+    //         const eligibilityMap = await Purchases.checkTrialOrIntroductoryPriceEligibility([productId]);
+    //         console.log(eligibilityMap, "tesing------")
+    //         const result = eligibilityMap[productId];
+    //         console.log(result, "result")
+    //         if (!result) return true;
+    //         if (result.status === 0 || result.status === 1) return false;
+    //         return true;
+    //     } catch (error) {
+    //         return true;
+    //     }
+    // };
+    const checkStrictEligibility = async (pkg) => {
+        try {
+            const productId = pkg.product.identifier;
+            
+
+            const eligibilityMap = await Purchases.checkTrialOrIntroductoryPriceEligibility([productId]);
+            const introStatus = eligibilityMap[productId]?.status;
+
+   
+            const customerInfo = await Purchases.getCustomerInfo();
+       
+            const hasPastEntitlements = Object.keys(customerInfo.entitlements.all).length > 0;
+            
+            const hasPurchasedBefore = customerInfo.allPurchaseDates[productId] !== undefined;
+
+            if (introStatus === 2 && !hasPastEntitlements && !hasPurchasedBefore) {
+                return true; 
+            }
+
+            return false;
+        } catch (error) {
+            console.error("Eligibility check failed", error);
+            return false; // Default to 'No Trial' on error for safety
         }
     };
 
@@ -166,19 +200,25 @@ const PremiumFinancialAdvice = () => {
             if (offerings.current && offerings.current.availablePackages.length > 0) {
                 const monthlyPackage = offerings.current.monthly || offerings.current.availablePackages[0];
                 setCurrentPackage(monthlyPackage);
+
+                console.log(monthlyPackage, "monthly")
+
                 const intro = monthlyPackage.product.introPrice;
                 if (intro) {
-                    setIntroOffer(intro);
+                    const eligible = await checkStrictEligibility(monthlyPackage);
+                    if (eligible) {
+                        setIntroOffer(intro);
+                    }
                 }
             }
         } catch (error) {
-            // silent
         }
     };
 
     const checkSubscriptionStatus = async () => {
         try {
             const customerInfo = await Purchases.getCustomerInfo();
+            console.log("customerInfo", JSON.stringify(customerInfo, null, 2))
             const hasActiveSubscription =
                 customerInfo.entitlements.active[PREMIUM_ENTITLEMENT_ID]?.isActive === true;
             setIsSubscribed(hasActiveSubscription);
@@ -209,7 +249,7 @@ const PremiumFinancialAdvice = () => {
 
         setIsPurchasing(true);
         try {
-            const { customerInfo, productIdentifier } = await Purchases.purchasePackage(currentPackage);
+            const { customerInfo } = await Purchases.purchasePackage(currentPackage);
             const hasAccess =
                 customerInfo.entitlements.active[PREMIUM_ENTITLEMENT_ID]?.isActive === true;
 
@@ -238,7 +278,6 @@ const PremiumFinancialAdvice = () => {
 
     const handlePurchaseError = (error) => {
         if (error.code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR) {
-            // user cancelled, no alert needed
         } else if (error.code === PURCHASES_ERROR_CODE.PURCHASE_NOT_ALLOWED_ERROR) {
             Alert.alert('Purchase Not Allowed', 'In-app purchases are disabled on this device.');
         } else if (error.code === PURCHASES_ERROR_CODE.PAYMENT_PENDING_ERROR) {
@@ -355,15 +394,12 @@ const PremiumFinancialAdvice = () => {
                     {isSubscribed ? "You're all set!" : "Premium Monthly Plan"}
                 </Text>
 
-                {/* ── Issue 3 Fix: Billed amount is always the LARGEST, most prominent element ── */}
                 {!isSubscribed && (
                     <>
-                        {/* Always show the actual billed price first and largest */}
                         <Text className="text-indigo-600 text-4xl font-bold mb-1">
                             {currentPackage ? currentPackage.product.priceString : 'Loading...'}/month
                         </Text>
 
-                        {/* Free trial shown BELOW in smaller, subordinate text */}
                         {isFreeIntro && (
                             <View className="mb-5">
                                 <View className="inline-flex flex-row items-center bg-green-100 px-3 py-1 rounded-full self-start mb-1">
@@ -377,7 +413,6 @@ const PremiumFinancialAdvice = () => {
                             </View>
                         )}
 
-                        {/* Paid intro offer shown BELOW in smaller, subordinate text */}
                         {!isFreeIntro && introOffer && (
                             <View className="mb-5">
                                 <Text className="text-gray-500 text-sm">
@@ -386,13 +421,11 @@ const PremiumFinancialAdvice = () => {
                             </View>
                         )}
 
-                        {/* No intro offer — just spacing */}
                         {!introOffer && (
                             <View className="mb-5" />
                         )}
                     </>
                 )}
-          
 
                 {isSubscribed && (
                     <Text className="text-indigo-600 text-xl font-bold mb-5">
@@ -422,7 +455,6 @@ const PremiumFinancialAdvice = () => {
                             <Text className="text-indigo-600 font-semibold ml-2">
                                 Redeem Offer Code
                             </Text>
-                            
                         </TouchableOpacity>
 
                         <Text className="text-green-700 text-xs text-center mt-1">
@@ -438,9 +470,7 @@ const PremiumFinancialAdvice = () => {
                             </Text>
                         </View>
 
-                        {/* ── Issue 4 Fix: Terms of Use + Privacy Policy always visible ── */}
                         <LegalFooter />
-                 
                     </>
                 ) : (
                     <View className="space-y-3">

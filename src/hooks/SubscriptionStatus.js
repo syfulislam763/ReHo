@@ -118,7 +118,7 @@ const checkSubscriptionStatus = async (getInfo) => {
     try {
         console.log('Checking subscription status...');
         const customerInfo = await Purchases.getCustomerInfo();
-        
+        console.log("customerInfo2", JSON.stringify(customerInfo, null, 2))
         console.log('Customer ID:', customerInfo.originalAppUserId);
         console.log('Active Entitlements:', Object.keys(customerInfo.entitlements.active));
         console.log('Active Subscriptions:', customerInfo.activeSubscriptions);

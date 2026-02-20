@@ -315,6 +315,7 @@ const ProfileScreen = () => {
             {
               text: "Delete",
               onPress: () => {
+                setVisible(false)
                 hanldeDeleteAccount();
               },
               style: "destructive"
