@@ -39,7 +39,8 @@ export const forget_password = async (payload, cb) => {
 export const login_user = async (payload, cb) => {
     try{
         const res = await api.post(LOGIN, payload);
-        cb(res.data)
+        cb(res.data);
+        //console.log("login data -> ", res.data)
     }catch(e){
         if(e.status == 409){
             cb({

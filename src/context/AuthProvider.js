@@ -92,7 +92,7 @@ export const AuthProvider = ({children}) => {
                 refreshToken: data?.refreshToken
             })
             setLoginVideoUrl(data?.videoToShow);
-            //initiateNotificationSocket(data.accessToken)
+            //console.log("video ->", JSON.stringify(data, null, 2))
         })
     }
 

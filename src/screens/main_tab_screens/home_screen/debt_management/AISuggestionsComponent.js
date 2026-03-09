@@ -52,7 +52,7 @@ const AISuggestionsComponent = () => {
         </Text>
 
         {/* Suggestions List */}
-        <View className="space-y-8">
+        <View className="space-y-8 pb-16">
             {/* Suggestion 1 */}
             
             {

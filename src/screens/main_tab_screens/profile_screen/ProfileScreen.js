@@ -214,11 +214,18 @@ const ProfileScreen = () => {
             {userProfile?.user?.email}
           </Text>
           
-          <TouchableOpacity onPress={() => navigation.navigate("PremiumFinancialAdvice")} className="bg-[#5055ba] py-3 rounded-[5px] w-full">
+          
+          {isSubscribed?<TouchableOpacity onPress={() => navigation.navigate("PremiumFinancialAdvice")} className="bg-[#2e7d32] py-3 rounded-[5px] w-full">
+            <Text className="text-white text-center font-medium text-base">
+              Your Premium access is active. Enjoy!
+            </Text>
+          </TouchableOpacity>:<TouchableOpacity onPress={() => navigation.navigate("PremiumFinancialAdvice")} className="bg-[#5055ba] py-3 rounded-[5px] w-full">
             <Text className="text-white text-center font-medium text-base">
               Subscribe To get ReHo Advice
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
+
+
         </View>
 
         {/* Menu Items */}

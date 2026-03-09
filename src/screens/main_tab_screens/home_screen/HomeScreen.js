@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, View, Text, ScrollView, Image, Modal, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { Video } from 'expo-av';
+import { Video, Audio } from 'expo-av';
 import AppHeader from '../../../components/AppHeader';
 import { BellDot, X, Maximize, Minimize, Play, Pause, Volume2, VolumeX } from 'lucide-react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -163,6 +163,17 @@ const HomeScreen = () => {
         await videoRef.current.setPositionAsync(newPosition);
         resetControlsTimeout();
     }
+    useEffect(() => {
+        const enableAudio = async () => {
+            await Audio.setAudioModeAsync({
+                allowsRecordingIOS: false,
+                playsInSilentModeIOS: true,  
+                staysActiveInBackground: false,
+                shouldDuckAndroid: true,
+            });
+        };
+        enableAudio();
+    }, []);
 
     useFocusEffect(
         useCallback(() => {

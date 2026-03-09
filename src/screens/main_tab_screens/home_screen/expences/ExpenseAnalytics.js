@@ -154,10 +154,10 @@ const BarChart = ({budgetDataFromAPI}) => {
 };
 
 const AIsuggestion = ({ number, text }) => (
-  <View className="flex-row mb-3 items-center">
-    <View className="h-2 w-2 rounded-full bg-black mr-3"/>
-    <View>
-      <Text className="text-gray-700 text-base">{highlightKeywords(text)}</Text>
+  <View className="flex-row flex-wrap mb-3 items-center relative">
+    <View className="h-2 w-2 rounded-full bg-black mr-3 absolute top-2.5"/>
+    <View className='ml-5'>
+      <Text className="text-gray-700 text-base ">{highlightKeywords(text)}</Text>
     </View>
   </View>
 );
@@ -219,7 +219,7 @@ export default function ExpenseAnalytics() {
         <BarChart budgetDataFromAPI={budgetDataFromAPI}/>
 
         {/* AI Suggestions Section */}
-        <View className="rounded-2xl ">
+        <View className="rounded-2xl pb-16">
          {isSubscribed? //
             <View>
               <Text className="text-gray-900 font-bold text-lg mb-4">
