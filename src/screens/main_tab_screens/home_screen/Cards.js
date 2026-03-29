@@ -14,6 +14,8 @@ const Cards = () => {
 
   const {userProfile} = useAuth();
 
+  
+
   const income = userProfile?.analytics?.totalIncome? "£"+Number(userProfile?.analytics?.totalIncome).toFixed(0):"£0"
   const expense = userProfile?.analytics?.totalExpenses? "£"+Number(userProfile?.analytics?.totalExpenses).toFixed(0):"£0"
   const budget = userProfile?.analytics?.totalBudget? "£"+Number(userProfile?.analytics?.totalBudget).toFixed(0): "£0"

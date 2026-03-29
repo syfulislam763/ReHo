@@ -13,7 +13,7 @@ const ComponentWrapper = ({
 }
 ) => {
     return (
-        <SafeAreaView className={`flex-1 ${bg_color} pb-10`}>
+        <SafeAreaView className={`flex-1 ${bg_color}`}>
             {headerComponent?headerComponent():
                 <View className="px-5 pb-3">
                     <AppHeader
