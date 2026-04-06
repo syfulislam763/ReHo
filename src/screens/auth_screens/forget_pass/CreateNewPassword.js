@@ -23,6 +23,14 @@ const CreateNewPassword = () => {
 
 
     const handleChangePassword = () => {
+        if(!password){
+            ToastMessage("error", "Password is required!");
+            return;
+        }
+        if(password.length < 8){
+            ToastMessage("error", "Password should be minimum 8 character");
+            return;
+        }
         if(password == confirmPassword){
             setLoader(true);
             const payload = {
@@ -50,7 +58,7 @@ const CreateNewPassword = () => {
 
     return (
         <SafeAreaView className="flex-1 bg-white">
-            <View className="">
+            <View className="px-5">
                 <AppHeader
                     left={()=> <BackButtion/>}
                 />

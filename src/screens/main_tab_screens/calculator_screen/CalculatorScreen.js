@@ -13,6 +13,7 @@ import Indicator from '../../../components/Indicator';
 import { ActivityIndicator } from 'react-native';
 import {calculate_loan} from '../ScreensAPI'
 import PrimaryInputField from '../../../components/PrimaryInputField';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -117,7 +118,12 @@ const CalculatorScreen = () => {
   const navigation = useNavigation()
   return (
    <ComponentWrapper container_bg='bg-white' headerComponent={() => <AppHeader middle={()=><Text className="text-white font-archivo-semi-bold text-2xl">{"Finance Calculator"}</Text>}/>} bg_color='bg-[#1976D2]'>
-     <View style={styles.container}>
+     
+
+     <ScrollView showsVerticalScrollIndicator={false} className='flex-1' contentContainerStyle={{
+               paddingBottom: Platform.OS === 'android' ? 350 : 350
+             }}>
+      <View style={[styles.container]}>
         <Text style={styles.title}>Loan Repayment Details</Text>
 
        
@@ -150,7 +156,8 @@ const CalculatorScreen = () => {
             Calculate Repayment
             </Text>
         </Pressable>
-        </View>
+      </View>
+     </ScrollView>
 
 
         {visible && <Indicator visible={visible} onClose={() => setVisible(false)}>

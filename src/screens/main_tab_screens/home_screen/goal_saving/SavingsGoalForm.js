@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView, ActivityIndicator, Platform } from 'react-native';
 import { ChevronDown, Calendar, Clock, MapPin, InfoIcon } from 'lucide-react-native';
 import AppHeader from '../../../../components/AppHeader';
 import ComponentWrapper from '../../../../components/ComponentWrapper';
@@ -97,7 +97,13 @@ const SavingsGoalForm = () => {
 
   return (
     <ComponentWrapper title={route.params?.isEdit?"Edit Savings Goal":'Add Savings Goal'} bg_color='bg-[#2E7D32]' >
-        <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+        <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        className="flex-1"
+        contentContainerStyle={{
+          paddingBottom: Platform.OS === 'android' ? 350 : 350
+        }}
+        >
         <View className="">
             
             {/* Goal Name Field */}

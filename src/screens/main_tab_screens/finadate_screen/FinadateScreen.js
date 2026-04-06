@@ -248,7 +248,7 @@ const FinadateScreen = () => {
       >
         <ScrollView 
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1, paddingBottom: Platform.OS === 'android' ? 120 : 40 }}
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: Platform.OS === 'android' ? 350 : 100 }}
           keyboardShouldPersistTaps="handled"
         >
         <View className="">

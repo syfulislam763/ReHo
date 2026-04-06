@@ -45,11 +45,9 @@ const HomeScreen = () => {
         setVisible(true);
         get_analytics((res) => {
             if(res){
-                console.log("user profile -> ", JSON.stringify(res?.data, null, 2))
                 setUserProfile(res?.data);
                 initializeRevenueCat(res?.data?.user, (isSubscribed, subscriptionInfo) => {
                     const isTrue = (isSubscribed)
-                    //|| subscriptionInfo?.originalAppUserId === 'bravohure@gmail.com'
                     setIsSubscribed(isTrue);
                     setSubscriptionInfo(subscriptionInfo);
                 })

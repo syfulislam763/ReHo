@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import AppHeader from './AppHeader';
 import BackButtion from './BackButtion';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ComponentWrapper = ({
     bg_color="bg-red-500", 
@@ -12,6 +13,7 @@ const ComponentWrapper = ({
     container_bg ="bg-[##e7eaef]"
 }
 ) => {
+    const insets = useSafeAreaInsets();
     return (
         <SafeAreaView className={`flex-1 ${bg_color}`}>
             {headerComponent?headerComponent():

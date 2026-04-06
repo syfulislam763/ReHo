@@ -7,7 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   Image,
-  Platform
+  Platform,
 } from 'react-native';
 import CommponentWrapper from '../../../../components/ComponentWrapper';
 import { useNavigation } from '@react-navigation/native';
@@ -31,6 +31,7 @@ const FutureValueCalculator = () => {
     amount: '100',
     multiplier: 'Auto Fill'
   });
+
 
   const [visible, setVisible] = useState(false);
 
@@ -129,7 +130,7 @@ const FutureValueCalculator = () => {
     <CommponentWrapper container_bg='bg-white' title='Inflation Calculator'>
       <ScrollView contentContainerStyle={{ 
                   flexGrow: 1, 
-                  paddingBottom: Platform.OS === 'android' ? 200 : 20 
+                  paddingBottom: Platform.OS === 'android' ? 350 : 350
                 }}
                 keyboardShouldPersistTaps="handled"  showsVerticalScrollIndicator={false} className="flex-1 pt-8 bg-gray-50 px-3 border border-gray-200 rounded-[5px]">
         {/* Tab Switcher */}

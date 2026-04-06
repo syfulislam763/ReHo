@@ -83,7 +83,7 @@ const SignUpScreen = () => {
     <SafeAreaView className="flex-1 bg-white px-5 pt-10">
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ 
                     flexGrow: 1, 
-                    paddingBottom: Platform.OS === 'android' ? 200 : 20 
+                    paddingBottom: Platform.OS === 'android' ? 350 : 350
                   }}
                   keyboardShouldPersistTaps="handled" className="">
             {/* Title */}
@@ -149,6 +149,8 @@ const SignUpScreen = () => {
             <PrimaryButton 
                 onPress={handleSignUp}
                 text="Sign Up"
+                disabled={!agreeTerms}
+                bgColor= {!agreeTerms ? "bg-button-bg/60":"bg-button-bg"}
             />
 
             {/* Or Separator */}

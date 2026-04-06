@@ -19,7 +19,7 @@ const ConfirmPasswordChange = () => {
 
     return (
         <SafeAreaView className="flex-1 bg-white">
-            <View className="">
+            <View className="px-5">
                 <AppHeader
                     left={()=> <BackButtion/>}
                 />

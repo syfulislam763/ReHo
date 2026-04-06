@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator, Platform } from 'react-native';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AppHeader from '../../../components/AppHeader';
@@ -9,6 +9,7 @@ import { verify_email, resend_otp } from '../AuthAPI';
 import { useRoute } from '@react-navigation/native';
 import ToastMessage from '../../../constants/ToastMessage';
 import Indicator from '@/components/Indicator';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const roket = require("../../../../assets/img/roket.png")
 
@@ -112,79 +113,83 @@ const SignUpOTPVerification = () => {
 
     return (
         <SafeAreaView className="flex-1 bg-white">
-            <View className="px-5">
+            <View className="px-5 flex-1">
                 <AppHeader
                     left={() => <BackButtion />}
                 />
 
                 {/* ── Progress Bar ── */}
-                <View
-                    style={styles.track}
-                    onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
-                >
-                    <View style={[styles.fill, { width: fillWidth }]} />
-                </View>
-                <View className=''>
-                    <Text className='text-base text-right'>{formatTime(timeLeft)}</Text>
-                </View>
-        
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{
+                          paddingBottom: Platform.OS === 'android' ? 350 : 350
+                        }} className='flex-1'>
+                    <View
+                        style={styles.track}
+                        onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
+                    >
+                        <View style={[styles.fill, { width: fillWidth }]} />
+                    </View>
+                    <View className=''>
+                        <Text className='text-base text-right'>{formatTime(timeLeft)}</Text>
+                    </View>
+            
 
-                {/* Rocket Icon */}
-                <View className="items-center my-6">
-                    <Image
-                        source={roket}
-                        className="h-20 w-20"
-                        style={{ objectFit: 'contain' }}
-                    />
-                </View>
-
-                <View className="px-7">
-                    <Text className="text-3xl font-archivo-semi-bold text-gray-900 text-center mb-4">
-                        Verify your email
-                    </Text>
-                    <Text className="text-gray-500 font-inter-regular text-center mb-12 px-4 leading-6">
-                        Please enter the verification code{' '}
-                        <Text className="font-inter-semi-bold text-gray-700">we sent to your email</Text>
-                        {' '}to complete the verification process.
-                        <Text className="font-inter-semi-bold text-gray-700"> If you don't see the email, please check your spam folder.</Text>
-                    </Text>
-                </View>
-
-                <Text className="text-2xl font-inter-regular text-gray-900 mb-4">
-                    OTP Code
-                </Text>
-
-                <View className="flex-row justify-between mb-10">
-                    {otp.map((digit, index) => (
-                        <TextInput
-                            key={index}
-                            ref={(ref) => (inputRefs.current[index] = ref)}
-                            className="w-1/5 h-16 rounded-lg text-center text-xl font-semibold bg-[#F7F7F9]"
-                            value={digit}
-                            onChangeText={(value) => handleOtpChange(value, index)}
-                            onKeyPress={(e) => handleKeyPress(e, index)}
-                            keyboardType="numeric"
-                            maxLength={1}
-                            selectTextOnFocus
+                    {/* Rocket Icon */}
+                    <View className="items-center my-6">
+                        <Image
+                            source={roket}
+                            className="h-20 w-20"
+                            style={{ objectFit: 'contain' }}
                         />
-                    ))}
-                </View>
+                    </View>
 
-                <PrimaryButton
-                    onPress={() => {
-                        if (!loader) submitOTP();
-                    }}
-                    text='Verify'
-                    bgColor={otp.length >= 4 ? "bg-button-bg" : 'bg-[#EBEBEA]'}
-                />
-
-                <View className="flex-row justify-between items-center mt-2">
-                    <TouchableOpacity onPress={resend}>
-                        <Text className="text-gray-500 text-base underline font-inter-regular">
-                            Resend code
+                    <View className="px-7">
+                        <Text className="text-3xl font-archivo-semi-bold text-gray-900 text-center mb-4">
+                            Verify your email
                         </Text>
-                    </TouchableOpacity>
-                </View>
+                        <Text className="text-gray-500 font-inter-regular text-center mb-12 px-4 leading-6">
+                            Please enter the verification code{' '}
+                            <Text className="font-inter-semi-bold text-gray-700">we sent to your email</Text>
+                            {' '}to complete the verification process.
+                            <Text className="font-inter-semi-bold text-gray-700"> If you don't see the email, please check your spam folder.</Text>
+                        </Text>
+                    </View>
+
+                    <Text className="text-2xl font-inter-regular text-gray-900 mb-4">
+                        OTP Code
+                    </Text>
+
+                    <View className="flex-row justify-between mb-10">
+                        {otp.map((digit, index) => (
+                            <TextInput
+                                key={index}
+                                ref={(ref) => (inputRefs.current[index] = ref)}
+                                className="w-1/5 h-16 rounded-lg text-center text-xl font-semibold bg-[#F7F7F9]"
+                                value={digit}
+                                onChangeText={(value) => handleOtpChange(value, index)}
+                                onKeyPress={(e) => handleKeyPress(e, index)}
+                                keyboardType="numeric"
+                                maxLength={1}
+                                selectTextOnFocus
+                            />
+                        ))}
+                    </View>
+
+                    <PrimaryButton
+                        onPress={() => {
+                            if (!loader) submitOTP();
+                        }}
+                        text='Verify'
+                        bgColor={otp.length >= 4 ? "bg-button-bg" : 'bg-[#EBEBEA]'}
+                    />
+
+                    <View className="flex-row justify-between items-center mt-2">
+                        <TouchableOpacity onPress={resend}>
+                            <Text className="text-gray-500 text-base underline font-inter-regular">
+                                Resend code
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View>
 
             {loader && (

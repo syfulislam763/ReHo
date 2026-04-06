@@ -140,6 +140,8 @@ const SignInScreen = () => {
             <PrimaryButton 
                 onPress={()=>{handleLogin()}}
                 text="Log In"
+                disabled={!agreeTerms}
+                bgColor= {!agreeTerms ? "bg-button-bg/60":"bg-button-bg"}
             />
 
             {/* Or Separator */}
