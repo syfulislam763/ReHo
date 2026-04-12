@@ -28,6 +28,7 @@ const FinancialSummary = () => {
   const handleGetTips = () => {
     get_savings_tips(authToken.accessToken, res => {
       if(res){
+        console.log(JSON.stringify(res, null, 2), "tips")
         setTips(res);
       }
     })
@@ -47,6 +48,8 @@ const FinancialSummary = () => {
           handleGetTips()
       }, [])
   )
+
+
 
 
 

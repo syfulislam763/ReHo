@@ -155,7 +155,7 @@ const BarChart = ({budgetDataFromAPI}) => {
 
 const AIsuggestion = ({ number, text }) => (
   <View className="flex-row flex-wrap mb-3 items-center relative">
-    <View className="h-2 w-2 rounded-full bg-black mr-3 absolute top-2.5"/>
+    <View className="h-2 w-2 bg-black mr-3 absolute top-2.5"/>
     <View className='ml-5'>
       <Text className="text-gray-700 text-base ">{highlightKeywords(text)}</Text>
     </View>

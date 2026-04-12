@@ -116,7 +116,16 @@ export const formatLoanImpactText = (text) => {
         
         return (
           <View key={lineIndex} style={{ flexDirection: 'row', marginBottom: 8 }}>
-            {hasBullet && <Text style={{ marginRight: 8, marginTop: 2 }}>•</Text>}
+            {hasBullet && <View
+                            style={{
+                              width: 5,
+                              height: 5,
+                              backgroundColor: '#1F2937',
+                              borderRadius: 1,
+                              marginTop: 6,
+                              marginRight: 20,
+                            }}
+                          />}
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 14, lineHeight: 20 }}>
                 {parts.map((part, index) => {

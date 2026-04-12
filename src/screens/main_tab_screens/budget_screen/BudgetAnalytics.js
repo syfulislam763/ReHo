@@ -13,35 +13,7 @@ import { highlightKeywords } from '../../../utils/utils';
 const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-// const budgetDataFromAPI = [
-//     { "month": "Jan", "totalBudget": 2000 },
-//     { "month": "Feb", "totalBudget": 0 },
-//     { "month": "Mar", "totalBudget": 10 },
-//     { "month": "Apr", "totalBudget": 300 },
-//     { "month": "May", "totalBudget": 3000 },
-//     { "month": "Jun", "totalBudget": 11100 },
-//     { "month": "Jul", "totalBudget": 500 },
-//     { "month": "Aug", "totalBudget": 100 },
-//     { "month": "Sep", "totalBudget": 5000 },
-//     { "month": "Oct", "totalBudget": 5650 },
-//     { "month": "Nov", "totalBudget": 2000 },
-//     { "month": "Dec", "totalBudget": 1000 }
-// ];
-const budgetDataFromAPI = [
-    { "month": "Jan", "totalBudget": 2000 , essential: 300, discresonary: 350, savings: 1350},
-    { "month": "Feb", "totalBudget": 0 , essential: 0, discresonary: 0, savings: 0},
-    { "month": "Mar", "totalBudget": 10 , essential: 0, discresonary: 10, savings: 0},
-    { "month": "Apr", "totalBudget": 300 , essential: 300, discresonary: 0, savings: 0},
-    { "month": "May", "totalBudget": 3000 , essential: 300, discresonary: 2000, savings: 700},
-    { "month": "Jun", "totalBudget": 11100 , essential: 1100, discresonary: 5000, savings: 5000},
-    { "month": "Jul", "totalBudget": 500 , essential: 300, discresonary: 0, savings: 200},
-    { "month": "Aug", "totalBudget": 100 , essential: 30, discresonary: 50, savings: 20},
-    { "month": "Sep", "totalBudget": 5000 , essential: 3000, discresonary: 350, savings: 2650},
-    { "month": "Oct", "totalBudget": 5650 , essential: 3000, discresonary: 2650, savings: 0},
-    { "month": "Nov", "totalBudget": 20000 , essential: 10000, discresonary: 5000, savings: 5000},
-    //{ "month": "Dec", "totalBudget": 1000, essential: 300, discresonary: 350, savings: 250 },
-    { "month": "Dec", "totalBudget": 30000 , essential: 10000, discresonary: 10000, savings: 10000},
-];
+
 
 const BarChart = ({budgetDataFromAPI}) => {
   const getLast6Months = () => {
@@ -233,148 +205,10 @@ const BarChart = ({budgetDataFromAPI}) => {
     </View>
   );
 };
-// const BarChart = ({budgetDataFromAPI}) => {
-
-//   const getLast6Months = () => {
-//     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//     const currentDate = new Date();
-//     const currentMonth = currentDate.getMonth();
-    
-//     const last6Months = [];
-//     for (let i = 5; i >= 0; i--) {
-//       const monthIndex = (currentMonth - i + 12) % 12;
-//       last6Months.push(months[monthIndex]);
-//     }
-    
-//     return last6Months;
-//   };
-
-//   const getBudgetExpensesData = () => {
-//     const months = getLast6Months();
-    
-//     const budgetMap = budgetDataFromAPI.reduce((acc, item) => {
-//         acc[item.month] = item.totalBudget;
-//         return acc;
-//     }, {});
-
-//     return months.map(month => ({
-//       month,
-//       amount: budgetMap[month] !== undefined ? budgetMap[month] : 0
-//     }));
-//   };
-
-//   const expenseData = getBudgetExpensesData();
-  
-//   const trueMaxAmount = Math.max(...expenseData.map(item => item.amount));
-  
- 
-//   const SCALING_CAP = 15000; 
-  
-//   const chartHeight = 135; 
-
-
-//   const chartData = expenseData.map(item => {
-  
-//     const scaledAmount = Math.min(item.amount, SCALING_CAP); 
-    
-//     const referenceMax = SCALING_CAP;
-    
-//     const height = referenceMax > 0 
-//       ? Math.max((scaledAmount / referenceMax) * chartHeight, 4) 
-//       : 4; 
-
-//     return {
-//       ...item,
-//       height: height
-//     };
-//   });
-
-//   const getYAxisLabels = () => {
-//     const displayMax = SCALING_CAP; 
-
-//     return [
-//       `£${formatNumber(displayMax)}${trueMaxAmount > displayMax ? '+' : ''}`, 
-//       `£${formatNumber(Math.round(displayMax * 0.75))}`, // £11,250
-//       `£${formatNumber(Math.round(displayMax * 0.5))}`,  // £7,500
-//       `£${formatNumber(Math.round(displayMax * 0.25))}`, // £3,750
-//       '£0'
-//     ];
-//   };
-
-//   const yAxisLabels = getYAxisLabels();
-
-//   return (
-//     <View className="bg-white rounded-2xl p-6 mb-6 ">
-//       {/* Chart Header */}
-//       <Text className="text-gray-900 font-semibold text-lg mb-6">
-//         Monthly Budget
-//       </Text>
-
-//       {/* Y-axis Labels and Chart Container */}
-//       <View className="flex-row">
-//         {/* Y-axis Labels */}
-//         <View className="mr-3">
-//           <View className="h-40 justify-between">
-//             {yAxisLabels.map((label, index) => (
-//               <Text key={index} className="text-gray-600 text-xs ">
-//                 {label}
-//               </Text>
-//             ))}
-//           </View>
-//         </View>
-
-//         {/* Chart Bars Container */}
-//         <View className="flex-1">
-//           {/* Chart Area */}
-//           <View className="h-40 flex-row items-end justify-between px-2">
-//             {chartData.map((data, index) => (
-//               <View key={index} className="items-center">
-//                 {/* Bar Value Display (Only for values exceeding the cap) */}
-                
-
-//                 <View 
-//                   className="bg-[#1976D2] w-8 rounded-t-sm justify-end align-bottom"
-//                   style={{ height: data.height, position:'relative' }}
-//                 >
-              
-//                   <Text 
-//                     className="text-white text-xs font-semibold mb-1" 
-//                     numberOfLines={1}
-//                     ellipsizeMode="clip"
-//                     style={{
-//                       position: 'absolute',
-//                       bottom: 40,
-//                       left: -25,
-//                       width: 120,
-//                       transform: [{ rotate: '-90deg' }],
-//                       color: '#000',
-//                       textAlign: 'center',
-//                     }}
-//                   >
-//                       {data.amount > SCALING_CAP ? `£${formatNumber(data.amount)}` : ''}
-//                   </Text>
-//                 </View>
-//               </View>
-//             ))}
-//           </View>
-
-//           {/* X-axis Labels */}
-//           <View className="flex-row justify-between px-2 mt-2">
-//             {chartData.map((data, index) => (
-//               <Text key={index} className="text-gray-600 text-xs">
-//                 {data.month}
-//               </Text>
-//             ))}
-//           </View>
-//         </View>
-//       </View>
-//     </View>
-//   );
-// };
 
 const AIsuggestion = ({ number, text }) => (
   <View className="flex-row flex-wrap mb-3 items-center relative">
-    <View className="h-2 w-2 rounded-full bg-black mr-3 absolute top-2.5"/>
+    <View className="h-2 w-2 bg-black mr-3 absolute top-2.5"/>
     <View className='ml-5'>
       <Text className="text-gray-700 text-base ">{highlightKeywords(text)}</Text>
     </View>
