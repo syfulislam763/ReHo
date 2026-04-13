@@ -83,10 +83,10 @@ const LoanResultComponent = ({
             <View className="bg-gray-50 rounded-[5px] p-6 border border-gray-200 mb-6">
             <View className="flex-row items-center mb-3">
                 <View className="w-6 h-6 mr-1">
-                <Lightbulb size={24} color="#3B82F6" />
+                <Lightbulb size={20} color="#3B82F6" />
                 </View>
-                <Text className="text-blue-600 font-semibold text-base">
-                Financial Tip
+                <Text className="text-blue-600 font-semibold ml-3 text-base">
+                    Financial Tip
                 </Text>
             </View>
                 {/* <Text className="text-gray-600 text-sm leading-5">

@@ -7,7 +7,7 @@ import { get_savings_tips } from '../../ScreensAPI';
 import { useAuth } from '../../../../context/AuthProvider';
 import { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { highlightKeywords } from '../../../../utils/utils';
+import { highlightKeywords, renderSuggestionLines } from '../../../../utils/utils';
 
 const coin = require("../../../../../assets/img/coin.png")
 
@@ -33,11 +33,12 @@ const FutureValueProjection = () => {
         }, [])
     )
 
+    console.log(JSON.stringify(tips, null, 2), "tips")
 
 
   return (
     <CommponentWrapper container_bg='bg-white' title='Inflation Calculator Results'>
-        <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+        <ScrollView contentContainerStyle={{paddingBottom:100}} showsVerticalScrollIndicator={false} className="flex-1">
         
             <View className="bg-gray-50 rounded-[5px] border border-gray-200 p-6 mb-4 ">
      
@@ -125,7 +126,7 @@ const FutureValueProjection = () => {
                 {/* Description */}
                 <Text className="text-gray-700 text-sm leading-5">
                     {tips?
-                        <Text>{params?.flag?highlightKeywords(tips?.historicalTip):highlightKeywords(tips?.futureValueTip)}</Text>
+                        <Text>{params?.flag?renderSuggestionLines(tips?.historicalTip, "square", {marginLeft:10}):renderSuggestionLines(tips?.futureValueTip, "square", {marginLeft: 23})}</Text>
                         : ' '
                     }
                 </Text>

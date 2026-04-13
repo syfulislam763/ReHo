@@ -48,6 +48,39 @@ export const toISOStringFromDateTime = (dateStr, timeStr) => {
   return date.toISOString();
 }
 
+export const renderSuggestionLines = (text, type="line", style={}) => {
+  const lines = text.split('\n');
+  return lines.map((line, index) => {
+    const isBullet = line.trimStart().startsWith('-');
+    const content = isBullet ? line.replace(/^\s*-\s*/, '') : line;
+
+    if (!content.trim()) return null;
+
+    return (
+      <View key={index} className="flex-row items-start mb-1">
+        {isBullet ? (
+          <View
+            style={{
+              width: 5,
+              height: type=="line"?2:5,
+              backgroundColor: '#1F2937', // gray-800
+              marginTop: 10,
+              marginRight: 20,
+              borderRadius: 1,
+              ...style
+            }}
+          />
+        ) : (
+          <View style={{ marginRight: 23 }} /> // indent non-bullet lines same amount
+        )}
+        <Text className="text-gray-600 text-base flex-1 mb-3">
+          {highlightKeywords(content)}
+        </Text>
+      </View>
+    );
+  });
+};
+
 
 export const highlightKeywords = (text) => {
   const redKeywords = ['income', 'incomes', 'debts', 'debt', 'expense', 'expenses', 'loss', 'inflation', 'decreased', ];

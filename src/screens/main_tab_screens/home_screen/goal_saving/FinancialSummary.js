@@ -13,7 +13,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 import { useAuth } from '../../../../context/AuthProvider';
 import { get_ad, get_savings_tips } from '../../ScreensAPI';
-import { formatLoanImpactText, highlightKeywords } from '@/utils/utils';
+import { formatLoanImpactText, highlightKeywords, renderSuggestionLines } from '@/utils/utils';
+import { Lightbulb } from 'lucide-react-native';
 
 const FinancialSummary = () => {
   const route = useRoute();
@@ -100,14 +101,14 @@ const FinancialSummary = () => {
         {/* Financial Tip Card */}
         <View className="bg-white rounded-[7px] p-6 mb-4">
           <View className="flex-row items-center mb-3">
-            <Text className="text-green-600 text-lg mr-2">💡</Text>
-            <Text className="text-green-600 text-lg font-semibold">Financial Tip</Text>
+            <Lightbulb size={20} color="#3B82F6" />
+            <Text className="text-green-600 text-lg font-semibold ml-3">Financial Tip</Text>
           </View>
           {/* <Text className="text-gray-500 text-sm leading-6">
             Your monthly disposable Income will decrease by %{financialData.monthlyDecrease.toFixed(2)} due to this loan. Plan accordingly!
           </Text> */}
           <Text className="text-gray-500 text-sm leading-6">
-            {tips&& highlightKeywords(tips?.savingsTip)}
+            {tips&& renderSuggestionLines(tips?.savingsTip, "square")}
           </Text>
         </View>
 
