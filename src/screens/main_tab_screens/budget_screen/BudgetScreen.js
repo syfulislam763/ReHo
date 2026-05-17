@@ -34,6 +34,7 @@ const BudgetScreen = () => {
 
 
     get_monthly_budget("all", res => {
+      console.log("budget data", JSON.stringify(res?.data, null, 2))
       if(res){
         let totalSavings = 0;
         let totalEssential = 0;

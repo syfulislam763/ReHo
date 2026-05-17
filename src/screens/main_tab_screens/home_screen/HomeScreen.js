@@ -45,7 +45,7 @@ const HomeScreen = () => {
         setVisible(true);
         get_analytics((res) => {
             if(res){
-                setUserProfile(res?.data);
+                setUserProfile(res?.data); 
                 initializeRevenueCat(res?.data?.user, (isSubscribed, subscriptionInfo) => {
                     const isTrue = (isSubscribed)
                     setIsSubscribed(isTrue);
@@ -54,7 +54,7 @@ const HomeScreen = () => {
             }else{
 
             }
-            setVisible(false);
+            setVisible(false); //fdjjjjb
         })
         get_last_analytics((res) => {
             if(res){
@@ -71,8 +71,7 @@ const HomeScreen = () => {
                     const d = get_formated_time(item.createdAt)
                     return {
                         id: item._id,
-                        type: item.type,
-                        icon: 'bell',
+                        type: item.type,//
                         title: item.title,
                         description: item.message,
                         time: d.time + " - " + d.month + " " + d.year, 
@@ -208,7 +207,7 @@ const HomeScreen = () => {
     }, [])
 
     return (
-        <SafeAreaView  className="flex-1 bg-[#4F55BA]">
+        <SafeAreaView  className="flex-1 bg-[#44203a]">
             <StatusBar style="light" backgroundColor="#4F55BA" />
             <View className="px-5 pb-4">
                 <AppHeader 

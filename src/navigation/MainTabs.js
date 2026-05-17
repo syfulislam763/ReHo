@@ -18,7 +18,7 @@ export default function MainTabs() {
     <Tab.Navigator
         screenOptions={({ route }) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-            const hiddenRoutes = ['ChatUIScreen']
+            const hiddenRoutes = ['ChatUIScreen', 'PremiumFinancialAdvice']
             const shouldHideTabBar = hiddenRoutes.includes(routeName);
 
             return {

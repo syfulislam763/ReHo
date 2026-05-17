@@ -15,7 +15,7 @@ import ChatUIScreen from "../../screens/main_tab_screens/profile_screen/ChatUISc
 import ChangePassword from "../../screens/main_tab_screens/profile_screen/ChangePassword";
 import PartnerForm from "../../screens/auth_screens/otp_verification/PartnerForm";
 import PartnerRequestScreen from "../../screens/auth_screens/otp_verification/PartnerRequestScreen";
-
+import PremiumFinancialAdvice2 from "../../screens/main_tab_screens/profile_screen/PremiumFinancialAdvice2";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,7 +42,7 @@ export default function ProfileStack(){
 
             <Stack.Screen name="NotificationsFeedScreen" component={NotificationsFeedScreen}  />
 
-            <Stack.Screen name="PremiumFinancialAdvice" component={PremiumFinancialAdvice} />
+            <Stack.Screen name="PremiumFinancialAdvice" component={PremiumFinancialAdvice2} />
 
             <Stack.Screen name="PaymentMethodsSelector" component={PaymentMethodsSelector}  />
 
